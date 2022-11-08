@@ -19,3 +19,28 @@ fetchPokedexBtn?.addEventListener("click", async () => {
   );
   responseText.innerText = JSON.stringify(response);
 });
+
+const fetchKantoBtn = document.getElementById("fetch-kanto-btn")!;
+const fetchHoennBtn = document.getElementById("fetch-hoenn-btn")!;
+
+fetchKantoBtn.addEventListener("click", async () => {
+  const response = await fetch("/.netlify/functions/pokedex", {
+    method: "POST",
+    body: JSON.stringify({
+      region: "kanto",
+    }),
+  }).then((response) => response.json());
+
+  responseText.innerText = JSON.stringify(response);
+});
+
+fetchHoennBtn.addEventListener("click", async () => {
+  const response = await fetch("/.netlify/functions/pokedex", {
+    method: "POST",
+    body: JSON.stringify({
+      region: "hoenn",
+    }),
+  }).then((response) => response.json());
+
+  responseText.innerText = JSON.stringify(response);
+});
