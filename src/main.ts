@@ -1,10 +1,21 @@
 import "./style.css";
 
-const root = document.querySelector<HTMLDivElement>("#app");
-const button = document.createElement("button");
-button.innerText = "Say Hello";
-button.onclick = function () {
-  console.log("Hello!");
-};
+// const root = document.querySelector<HTMLDivElement>("#app")!;
+const fetchBtn = document.querySelector<HTMLButtonElement>("#fetch-btn")!;
+const responseText =
+  document.querySelector<HTMLParagraphElement>("#response-output")!;
 
-root?.append(button);
+fetchBtn.addEventListener("click", async () => {
+  const response = await fetch("/.netlify/functions/hello-world").then((res) =>
+    res.json()
+  );
+  responseText.innerText = JSON.stringify(response);
+});
+
+const fetchPokedexBtn = document.getElementById("fetch-pokedex-btn");
+fetchPokedexBtn?.addEventListener("click", async () => {
+  const response = await fetch("/.netlify/functions/pokedex").then((res) =>
+    res.json()
+  );
+  responseText.innerText = JSON.stringify(response);
+});
